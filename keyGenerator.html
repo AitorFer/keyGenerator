@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name='Author' content="Aitor Fernandez">
+    <meta name='keywords' content="key,generator,password,random,secure,longitud,caracteres,clave,segura">
+    <meta nanme='viewport' content="width=device-width,initial-scale=1.0">
+    <title>Key-generator</title>
+  </head>
+  <body>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+    body{
+      -webkit-background-size:cover;
+      -moz-background-size:cover;
+      -o-background-size:cover;
+      background-size:cover;
+    }
+    }
+    #contraseña{
+        font-style: normal;
+    }
+    #longitud{
+        border-radius: 30px;
+        border-width: 1px;
+        border-color: black;
+        border-style: outset;
+        width:400px;
+    }
+    #titulo{
+      margin-top:150px;
+    }
+    #alerta{
+      text-align: center;
+    }
+    #generar{
+      text-align: center;
+      margin-top: 100px;
+    }
+    #KeyGenerator{
+      font-style: oblique;
+      color: #0B610B;
+      text-align: center;
+    }
+    #obtener{
+      border-radius: 30px;
+    }
+    #reset{
+      border-radius: 30px;
+    }
+    .click{
+      background-color: #585858;
+    }
+        </style>
+        <div id='titulo' style='text-align: center'>
+            <h1 id='KeyGenerator'>Genera tu clave</h1><br>
+            <img src='candadoCerrado.png' id='candado' width='200' height="200">
+        </div>
+    <div id='generar'>
+      <input id='longitud' min="4" placeholder='Introduce numero de caracteres, min-4 max-15'>
+      <button id='obtener'>OBTENER</button>
+      <button id='reset'>RESET</button>
+      <h3 id='contraseña'></h3>
+</div>
+<div id='alerta'>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script type='text/javascript'>
+
+function password(){
+    $('button#obtener').click(function(){
+        $('div#alerta').html('')
+
+        var contraseña='';
+        var input=parseInt($('#longitud').val())
+        var caracteres="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz0123456789{}^[]!¡?¿&/*-+";
+    for(var x=0;x<input;x++){
+      contraseña=contraseña + caracteres[Math.floor(Math.random()*caracteres.length)]
+                //console.log(input)
+                //console.log(contraseña)
+    }
+      if(!input){
+        $('div#alerta').append('<br><div class="alert alert-warning" role="alert">Elige la longitud de tu contraseña</div>')
+      }
+      if(input<4 | input>30){
+        $('img#candado').attr('src','candadoCerrado.png')
+        $('div.alert-success').hide()
+        contraseña='';
+        $('h3#contraseña').html('')
+        $('div#alerta').append('<br><div class="alert alert-warning" role="alert">La contraseña no es segura, asegurate que contenga 4 caracteres o mas y 30 o menos</div>')
+      }
+      else if(input>=4 && input<=30){
+        $('div#alerta').append('<div class="alert alert-success" role="alert">Contraseña segura</div>')
+        $('div.alert-warning').hide()
+        $('h3#contraseña').text(contraseña)
+        $('img#candado').attr('src','candado.png')
+      }
+    //Reset
+
+      $('#reset').click(function(){
+      $('img#candado').attr('src','candadoCerrado.png')
+      $('div.alert-warning').hide()
+      $('div.alert-success').hide()
+      contraseña='';
+      $('h3#contraseña').html('')
+  });
+    });
+}
+  password()
+
+</script>
+<br>
+<div style='text-align:center;margin-right:350px;margin-left:350px;' id='description'>
+<p ><i><strong>Que es Key-generator</strong></i>
+</p>
+<p>
+   Una herramienta que genera contraseñas aleatórias para que tus contraseñas sean seguras cuando no se te ocurre una contraseña segura.
+   Ya quedaron atrás las contraseñas poco seguras y predecibles como en nombre de tu perro, de un familiar,
+   tu fecha de nacimiento o la típica de <i>"12345"</i> o <i>"qwerty"</i> que con un poco de ingeniería
+   social podrían descubrirtela. Con esta herramienta crearas una contraseña con números,simbolos,letras(mayúsculas y minúsculas) segura y fiable y con la longitud que tu prefieras.
+   </p>
+   <p><i><strong>Como se usa</strong></i>
+   </p>
+   <p>
+     Indica el numero de caracteres que quieres que tenga tu clave. Despues haz click en <i>"OBTENER"</i>, acuerdate que las contraseñas no pueden tener menos de 4 caracteres y no mas de 30.
+     Si no te convence la clave generada solo haz click en <i>"RESET"</i>, y vuelve a obtener una nueva.</p>
+   </div>
+  </body>
+</html>
